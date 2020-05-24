@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+            attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="devices">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="element" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="origin">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="^[a-zA-Z]{3,7}$"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="price">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:integer">
+                                        <xsd:minInclusive value="0"/>
+                                        <xsd:maxInclusive value="1000"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="type">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="group" type="xsd:string"/>
+                                        <xsd:element name="peripheral" type="xsd:boolean"/>
+                                        <xsd:element name="has_cooler" type="xsd:boolean"/>
+                                        <xsd:element name="port-list">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="port" type="xsd:string"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="energy_use" type="xsd:int"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="critical" type="xsd:boolean"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="id" type="xsd:int" use="required"/>
+                        <xsd:attribute name="name" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="booleanType">
+        <xsd:restriction base="xsd:boolean">
+            <xsd:enumeration value="true"/>
+            <xsd:enumeration value="false"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
